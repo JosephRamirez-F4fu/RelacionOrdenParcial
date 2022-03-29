@@ -33,7 +33,7 @@ class Conjunto_Ordenado {
 };
 class Diagrama_Hasse {
 			public:
-				Diagrama_Hasse();
+				Diagrama_Hasse(Conjunto_Ordenado *_obj_CO);
 				~Diagrama_Hasse();
 			void Dibujar_Diagrama_Hase();
 			private:

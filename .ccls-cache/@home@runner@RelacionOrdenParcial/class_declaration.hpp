@@ -24,9 +24,11 @@ class Conjunto_Ordenado {
 			void Imprimir_Relacion_Subconjunto_Divisores();
 			void ingresar_sub_conjunto_Div(int _n);
 			vector<int> get_sub_conjunt_Div();
+			vector<vector<int>> get_Relacion();
 	private:
 			numero *obj_numero
 			vector<int> sub_conjunt_Div;
+			vector<vector<int>> Relacion;
 			
 };
 class Diagrama_Hasse {
