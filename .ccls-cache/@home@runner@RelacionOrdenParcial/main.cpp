@@ -1,4 +1,4 @@
-#include "class_declaration.hpp"
+#include "class_declaration.h"
 
 int main() {
   
