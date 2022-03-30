@@ -24,6 +24,7 @@ class Conjunto_Ordenado {
 			~Conjunto_Ordenado();
 			void Imprimir_Relacion_Subconjunto_Divisores();
 			void ingresar_sub_conjunto_Div();
+			void Realizar_Relacion();
 			vector<int> get_sub_conjunt_Div();
 			vector<vector<int>> get_Relacion();
 	private:

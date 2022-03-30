@@ -22,6 +22,17 @@ vector<int> numero::get_Divisores_numero(){return Divisores;}
 /*-----------------------------------------------*/
 Conjunto_Ordenado::Conjunto_Ordenado(numero *_objnumero){obj_numero=_objnumero;}
 Conjunto_Ordenado::~Conjunto_Ordenado(){}
+Conjunto_Ordenado::Realizar_Relacion(){
+	for(int i=0;i<sub_conjunt_Div.size();i++){
+		vector<int>aux;
+		for(itn j=i;i<sub_conjunt_Div.size();j++){
+			if(sub_conjunt_Div[j]%sub_conjunt_Div[i]==0){
+				aux.push_back(sub_conjunt_Div[j]);
+			}
+		}
+		Relacion.push_back(aux);
+	}
+}
 void Conjunto_Ordenado::Imprimir_Relacion_Subconjunto_Divisores(){
 	/*Aqui ocn el subcunto de div se de ve imprmir la relacion tal que muestre
 	Ejemplo:
@@ -70,6 +81,7 @@ void Conjunto_Ordenado::ingresar_sub_conjunto_Div(){
 				break;
 		}
 	}
+	ordenar_min_max(sub_conjunt_Div);
 }
 vector<int> Conjunto_Ordenado::get_sub_conjunt_Div(){
 	return sub_conjunt_Div;}
