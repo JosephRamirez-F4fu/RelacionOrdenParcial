@@ -3,14 +3,16 @@
 /*-----------------------------------------------*/
 numero::numero(int _n)
 {
-  n = _n;
+  *n = _n;
 }
-numero::~numero(){}
+numero::~numero(){
+	delete n;
+}
 void numero::Divisores_numero()
 {
-for (int i = 1; i <= n; i++)
+for (int i = 1; i <= *n; i++)
 	{
-		if (n % i == 0)
+		if (*n % i == 0)
 		{
 			Divisores.push_back(i);
 		}
@@ -22,12 +24,13 @@ vector<int> numero::get_Divisores_numero(){return Divisores;}
 /*-----------------------------------------------*/
 Conjunto_Ordenado::Conjunto_Ordenado(numero *_objnumero){obj_numero=_objnumero;}
 Conjunto_Ordenado::~Conjunto_Ordenado(){}
-Conjunto_Ordenado::Realizar_Relacion(){
+void Conjunto_Ordenado::Realizar_Relacion(){
+	
 	for(int i=0;i<sub_conjunt_Div.size();i++){
 		vector<int>aux;
-		for(itn j=i;i<sub_conjunt_Div.size();j++){
-			if(sub_conjunt_Div[j]%sub_conjunt_Div[i]==0){
-				aux.push_back(sub_conjunt_Div[j]);
+		for(int j=i;i<sub_conjunt_Div.size();j++){
+			if(sub_conjunt_Div.at(i)%sub_conjunt_Div.at(j)==0){
+				aux.push_back(sub_conjunt_Div.at(j));
 			}
 		}
 		Relacion.push_back(aux);
@@ -54,6 +57,20 @@ void Conjunto_Ordenado::Imprimir_Relacion_Subconjunto_Divisores(){
 	sub_conjunto_div={1,2,6}
 
 */
+	cout<<"R={";
+	for(int i=0;i<sub_conjunt_Div.size();i++){
+		for(int j=0;j<Relacion.at(i).size();j++){
+			cout<<"(";
+			cout<< sub_conjunt_Div.at(i); 
+			cout<<",";
+			cout<<Relacion.at(i).at(j);
+			cout<<")";
+			if(i!=sub_conjunt_Div.size()-1&& j!=Relacion.at(i).size()-1)
+				cout<<",";
+		}
+	}
+	cout<<"}";
+	
 }
 void Conjunto_Ordenado::ingresar_sub_conjunto_Div(){
 	int ingresar;
@@ -103,14 +120,15 @@ bool n_in_vector(vector<int>v,int n){
 	return false;
 }
 
-void ordenar_min_max(vector<int>*v){
+vector<int> ordenar_min_max(vector<int>v){
 	for(int i=0;i<=v.size()-1;i++)
 		for(int j=i+1;j<=v.size();j++)
 			{
 				if(v[i]>v[j]){
-					int aux = v[i];
-					v[i]=v[j];
-					v[j]=aux;
+					int aux = v.at(i);
+					v.at(i)=v.at(j);
+					v.at(j)=aux;
 				}
 			}
+	return v;
 }

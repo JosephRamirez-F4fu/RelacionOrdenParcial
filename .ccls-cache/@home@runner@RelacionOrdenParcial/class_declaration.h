@@ -14,7 +14,7 @@ class numero {
 		void Divisores_numero();
 		vector<int> get_Divisores_numero();
 	private:
-			int n;
+			int *n;
 			vector<int> Divisores;
 			
 };
@@ -24,11 +24,12 @@ class Conjunto_Ordenado {
 			~Conjunto_Ordenado();
 			void Imprimir_Relacion_Subconjunto_Divisores();
 			void ingresar_sub_conjunto_Div();
+			void Realizar_Relacion();
 			vector<int> get_sub_conjunt_Div();
 			vector<vector<int>> get_Relacion();
 	private:
 			numero *obj_numero;
-			vector<int> sub_conjunt_Div;
+			vector<int>sub_conjunt_Div;
 			vector<vector<int>> Relacion;
 			
 };
@@ -43,4 +44,5 @@ class Diagrama_Hasse {
 /*------Funciones Recurrentes----------*/
 /*-----------------------------------------------*/
 bool n_in_vector(vector<int>v,int n);
+vector<int> ordenar_min_max(vector<int>v);
 

@@ -3,14 +3,16 @@
 /*-----------------------------------------------*/
 numero::numero(int _n)
 {
-  n = _n;
+  *n = _n;
 }
-numero::~numero(){}
+numero::~numero(){
+	delete n;
+}
 void numero::Divisores_numero()
 {
-for (int i = 1; i <= n; i++)
+for (int i = 1; i <= *n; i++)
 	{
-		if (n % i == 0)
+		if (*n % i == 0)
 		{
 			Divisores.push_back(i);
 		}
@@ -22,7 +24,54 @@ vector<int> numero::get_Divisores_numero(){return Divisores;}
 /*-----------------------------------------------*/
 Conjunto_Ordenado::Conjunto_Ordenado(numero *_objnumero){obj_numero=_objnumero;}
 Conjunto_Ordenado::~Conjunto_Ordenado(){}
-void Conjunto_Ordenado::Imprimir_Relacion_Subconjunto_Divisores(){}
+void Conjunto_Ordenado::Realizar_Relacion(){
+	
+	for(int i=0;i<sub_conjunt_Div.size();i++){
+		vector<int>aux;
+		for(int j=i;i<sub_conjunt_Div.size();j++){
+			if(sub_conjunt_Div.at(i)%sub_conjunt_Div.at(j)==0){
+				aux.push_back(sub_conjunt_Div.at(j));
+			}
+		}
+		Relacion.push_back(aux);
+	}
+}
+void Conjunto_Ordenado::Imprimir_Relacion_Subconjunto_Divisores(){
+	/*Aqui ocn el subcunto de div se de ve imprmir la relacion tal que muestre
+	Ejemplo:
+	A={1,2,3,6}}
+	Sub_A={1,2,6}
+	R={(1,1),(1,2),(1,6),(6,6)} La idea es imprimir la relacion como se muetra en esta linea
+	
+	elemento,relacion_divide
+
+	(1,1) (1,2) (1,6)
+	(2,2) (2,6)
+	(6,6)
+
+	Esta es la relacion sumado con el sub_conjunto_div
+	teniendo en la realacion 
+	relacion[0] = {1,2,6}
+	relacion[1]={2,6}
+	relacion[2]={6}
+	sub_conjunto_div={1,2,6}
+
+*/
+	cout<<"R={";
+	for(int i=0;i<sub_conjunt_Div.size();i++){
+		for(int j=0;j<Relacion.at(i).size();j++){
+			cout<<"(";
+			cout<< sub_conjunt_Div.at(i); 
+			cout<<",";
+			cout<<Relacion.at(i).at(j);
+			cout<<")";
+			if(i!=sub_conjunt_Div.size()-1&& j!=Relacion.at(i).size()-1)
+				cout<<",";
+		}
+	}
+	cout<<"}";
+	
+}
 void Conjunto_Ordenado::ingresar_sub_conjunto_Div(){
 	int ingresar;
 	while(true){
@@ -49,6 +98,7 @@ void Conjunto_Ordenado::ingresar_sub_conjunto_Div(){
 				break;
 		}
 	}
+	ordenar_min_max(sub_conjunt_Div);
 }
 vector<int> Conjunto_Ordenado::get_sub_conjunt_Div(){
 	return sub_conjunt_Div;}
@@ -68,4 +118,17 @@ bool n_in_vector(vector<int>v,int n){
 			return true;
 	}
 	return false;
+}
+
+vector<int> ordenar_min_max(vector<int>v){
+	for(int i=0;i<=v.size()-1;i++)
+		for(int j=i+1;j<=v.size();j++)
+			{
+				if(v[i]>v[j]){
+					int aux = v.at(i);
+					v.at(i)=v.at(j);
+					v.at(j)=aux;
+				}
+			}
+	return v;
 }
